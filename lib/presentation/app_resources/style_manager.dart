@@ -1,4 +1,4 @@
-import 'package:afalmi/presentation/font_manager.dart';
+import 'package:afalmi/presentation/app_resources/font_manager.dart';
 import 'package:flutter/cupertino.dart';
 
 TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {

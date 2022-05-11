@@ -1,6 +1,5 @@
-import 'package:afalmi/presentation/routes_manager.dart';
-import 'package:afalmi/presentation/theme_manager.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:afalmi/presentation/app_resources/routes_manager.dart';
+import 'package:afalmi/presentation/app_resources/theme_manager.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatefulWidget {

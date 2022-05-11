@@ -1,7 +1,7 @@
-import 'package:afalmi/presentation/color_manager.dart';
-import 'package:afalmi/presentation/font_manager.dart';
-import 'package:afalmi/presentation/style_manager.dart';
-import 'package:afalmi/presentation/values_manager.dart';
+import 'package:afalmi/presentation/app_resources/color_manager.dart';
+import 'package:afalmi/presentation/app_resources/font_manager.dart';
+import 'package:afalmi/presentation/app_resources/style_manager.dart';
+import 'package:afalmi/presentation/app_resources/values_manager.dart';
 import 'package:flutter/material.dart';
 
 ThemeData getApplicationTheme() {

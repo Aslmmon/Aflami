@@ -1,6 +1,6 @@
+import 'package:afalmi/presentation/app_resources/strings_manager.dart';
 import 'package:afalmi/presentation/onboarding/OnBoardingView.dart';
 import 'package:afalmi/presentation/splash/Splash.dart';
-import 'package:afalmi/presentation/strings_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
