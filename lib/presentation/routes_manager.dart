@@ -1,4 +1,5 @@
 import 'package:afalmi/presentation/splash/Splash.dart';
+import 'package:afalmi/presentation/strings_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,7 @@ class RouteGenerator {
   static Route<dynamic> undefinedRoute() => MaterialPageRoute(
       builder: (_) => const Scaffold(
             body: Center(
-              child: Text("No Route"),
+              child: Text(AppStrings.noRouteFound),
             ),
           ));
 }
