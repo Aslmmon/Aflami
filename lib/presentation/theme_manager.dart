@@ -84,7 +84,7 @@ ThemeData getApplicationTheme() {
                   const BorderRadius.all(Radius.circular(AppSizes.s8))),
         focusedErrorBorder: OutlineInputBorder(
             borderSide:
-            BorderSide(color: ColorManager.redColor, width: AppSizes.s8),
+            BorderSide(color: ColorManager.primary, width: AppSizes.s8),
             borderRadius:
             const BorderRadius.all(Radius.circular(AppSizes.s8))),
 
