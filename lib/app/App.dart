@@ -1,4 +1,6 @@
+import 'package:afalmi/presentation/theme_manager.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class MyApp extends StatefulWidget{
 
@@ -20,8 +22,5 @@ class MyApp extends StatefulWidget{
 
 class _MyAppState extends State<MyApp> {
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
+  Widget build(BuildContext context) => MaterialApp(theme: getApplicationTheme());
 }
