@@ -18,7 +18,7 @@ TextStyle getThinStyle(
     _getTextStyle(fontSize, FontWeightManager.fontWeightThin, color);
 
 TextStyle getSemiBoldStyle(
-        {double fontSize = FontSize.s12, required Color color}) =>
+        {double fontSize = FontSize.s24, required Color color}) =>
     _getTextStyle(fontSize, FontWeightManager.fontWeightSemiBold, color);
 
 TextStyle getLightStyle(

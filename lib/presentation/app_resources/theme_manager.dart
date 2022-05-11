@@ -47,12 +47,10 @@ ThemeData getApplicationTheme() {
        * Text Theme
        */
       textTheme: TextTheme(
-        headline1: getSemiBoldStyle(
-            color: ColorManager.primary, fontSize: AppSizes.s16),
-        subtitle1:
-            getLightStyle(color: ColorManager.primary, fontSize: AppSizes.s12),
-        caption:
-            getLightStyle(color: ColorManager.primary, fontSize: AppSizes.s12),
+        headline1: getSemiBoldStyle(color: ColorManager.primary, fontSize: AppSizes.s16),
+        headlineLarge: getSemiBoldStyle(color: ColorManager.primary),
+        subtitle1: getLightStyle(color: ColorManager.primary, fontSize: AppSizes.s12),
+        caption: getLightStyle(color: ColorManager.primary, fontSize: AppSizes.s12),
         bodyText1:
             getLightStyle(color: ColorManager.primary, fontSize: AppSizes.s12),
       ),
