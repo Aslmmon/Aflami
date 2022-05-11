@@ -71,5 +71,22 @@ ThemeData getApplicationTheme() {
               borderSide:
                   BorderSide(color: ColorManager.grey, width: AppSizes.s8),
               borderRadius:
-                  const BorderRadius.all(Radius.circular(AppSizes.s8)))));
+                  const BorderRadius.all(Radius.circular(AppSizes.s8))),
+          focusedBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(color: ColorManager.darkGrey, width: AppSizes.s8),
+              borderRadius:
+                  const BorderRadius.all(Radius.circular(AppSizes.s8))),
+          errorBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(color: ColorManager.redColor, width: AppSizes.s8),
+              borderRadius:
+                  const BorderRadius.all(Radius.circular(AppSizes.s8))),
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide:
+            BorderSide(color: ColorManager.redColor, width: AppSizes.s8),
+            borderRadius:
+            const BorderRadius.all(Radius.circular(AppSizes.s8))),
+
+      ));
 }
