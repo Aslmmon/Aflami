@@ -1,9 +1,8 @@
-import 'package:afalmi/presentation/app_resources/assets_manager.dart';
+import 'package:afalmi/domain/models.dart';
 import 'package:afalmi/presentation/app_resources/color_manager.dart';
-import 'package:afalmi/presentation/app_resources/strings_manager.dart';
 import 'package:afalmi/presentation/app_resources/values_manager.dart';
+import 'package:afalmi/presentation/onboarding/OnBoardingViewModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -15,40 +14,46 @@ class OnBoardingView extends StatefulWidget {
 
 class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController _pageController = PageController();
-  int _currentIndex = 0;
+  final OnBoardingViewModel _onBoardingViewModel = OnBoardingViewModel();
 
-  List<OnBoardingSlider> _provideSliders() => [
-        OnBoardingSlider(
-            title: AppStrings.onBoardingTitle1,
-            subtitle: AppStrings.onBoardingSubtitle1,
-            icon: ImageAssets.onBoardingOne),
-        OnBoardingSlider(
-            title: AppStrings.onBoardingTitle2,
-            subtitle: AppStrings.onBoardingSubtitle2,
-            icon: ImageAssets.onBoardingTwo),
-        OnBoardingSlider(
-            title: AppStrings.onBoardingTitle3,
-            subtitle: AppStrings.onBoardingSubtitle3,
-            icon: ImageAssets.onBoardingThree)
-      ];
+  _bind() {
+    _onBoardingViewModel.start();
+  }
+
+  @override
+  void initState() {
+    _bind();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _onBoardingViewModel.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.whitecolor,
-      body: SafeArea(
-        child: PageView.builder(
-            controller: _pageController,
-            itemCount: _provideSliders().length,
-            onPageChanged: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            itemBuilder: (context, builder) => OnBoardingPage(
-                onBoardingSlider: _provideSliders()[_currentIndex])),
-      ),
-    );
+    return StreamBuilder(
+        stream: _onBoardingViewModel.outputSliderView,
+        builder: (context, snapshot)
+    => snapshot.data ==null ? const SizedBox.shrink() :
+        Scaffold(
+          backgroundColor: ColorManager.whitecolor,
+          body: SafeArea(
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: (snapshot.data as SliderView).slidersLength,
+              onPageChanged: (index) {
+                _onBoardingViewModel.onPageChanged(index);
+              },
+              itemBuilder: (context, builder) =>
+                  OnBoardingPage(
+                      onBoardingSlider: (snapshot.data as SliderView)
+                          .onBoardingSlider),
+            ),
+          ),
+        ));
   }
 }
 
@@ -68,27 +73,23 @@ class OnBoardingPage extends StatelessWidget {
           const SizedBox(height: AppPaddings.p34),
           Text(
             onBoardingSlider.title,
-            style: Theme.of(context)
+            style: Theme
+                .of(context)
                 .textTheme
                 .headlineLarge
                 ?.copyWith(color: ColorManager.grey),
           ),
           const SizedBox(height: AppPaddings.p34),
           Text(onBoardingSlider.subtitle,
-              style: Theme.of(context).textTheme.caption?.copyWith(
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .caption
+                  ?.copyWith(
                   color: ColorManager.greySubtitle, fontSize: AppSizes.s13),
               textAlign: TextAlign.center)
         ],
       ),
     );
   }
-}
-
-class OnBoardingSlider {
-  final String title;
-  final String subtitle;
-  final String icon;
-
-  OnBoardingSlider(
-      {required this.title, required this.subtitle, required this.icon});
 }
