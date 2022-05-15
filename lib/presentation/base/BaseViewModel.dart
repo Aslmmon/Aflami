@@ -4,6 +4,8 @@ abstract class BaseViewModel extends BaseViewModelInputs with  BaseViewModelOutp
 abstract class BaseViewModelInputs{
   void start();
   void dispose();
+
+
 }
 
 abstract class BaseViewModelOutputs{
