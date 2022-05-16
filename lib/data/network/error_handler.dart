@@ -1,3 +1,5 @@
+import 'package:afalmi/data/network/failure.dart';
+
 enum DataSourceError {
   success,
   noContent,
@@ -14,6 +16,43 @@ enum DataSourceError {
   noInternetConnection,
 }
 
+extension DataSourceErrorExt on DataSourceError {
+  Failure getFailure() {
+    switch (this) {
+      case DataSourceError.success:
+        return Failure(ResponseCode.success, ResponseMessage.success);
+      case DataSourceError.noContent:
+        return Failure(ResponseCode.noContent, ResponseMessage.noContent);
+      case DataSourceError.badRequest:
+        return Failure(ResponseCode.badRequest, ResponseMessage.badRequest);
+      case DataSourceError.forbidden:
+        return Failure(ResponseCode.forbidden, ResponseMessage.forbidden);
+      case DataSourceError.unauthorized:
+        return Failure(ResponseCode.unauthorized, ResponseMessage.unauthorized);
+      case DataSourceError.notFound:
+        return Failure(ResponseCode.notFound, ResponseMessage.notFound);
+      case DataSourceError.internalServerError:
+        return Failure(ResponseCode.internalServerError,
+            ResponseMessage.internalServerError);
+      case DataSourceError.connectionTimeOut:
+        return Failure(
+            ResponseCode.connectTimeOut, ResponseMessage.connectTimeOut);
+      case DataSourceError.cancel:
+        return Failure(ResponseCode.cancel, ResponseMessage.cancel);
+      case DataSourceError.recieveTimeOut:
+        return Failure(
+            ResponseCode.recieveTimeOut, ResponseMessage.recieveTimeOut);
+      case DataSourceError.sendTimeOut:
+        return Failure(ResponseCode.sendTimeOut, ResponseMessage.sendTimeOut);
+      case DataSourceError.cachError:
+        return Failure(ResponseCode.cachError, ResponseMessage.cachError);
+      case DataSourceError.noInternetConnection:
+        return Failure(ResponseCode.noInternetConnection,
+            ResponseMessage.noInternetConnection);
+    }
+  }
+}
+
 class ResponseCode {
   // global Status Codes
   static const int success = 200;
@@ -22,6 +61,7 @@ class ResponseCode {
   static const int unauthorized = 401;
   static const int forbidden = 403;
   static const int internalServerError = 500;
+  static const int notFound = 404;
 
   //local Status codes
   static const int connectTimeOut = -1;
@@ -38,7 +78,7 @@ class ResponseMessage {
   static const String success = 'success';
   static const String noContent = 'success';
   static const String badRequest = 'bad request';
-  static const String unauthorized ='unauthroized';
+  static const String unauthorized = 'unauthroized';
   static const String forbidden = 'forbidden';
   static const String internalServerError = 'serverError';
 
@@ -48,6 +88,8 @@ class ResponseMessage {
   static const String recieveTimeOut = 'recievetimeOut';
   static const String sendTimeOut = 'sendTimeOut';
   static const String cachError = 'cachError';
-  static const String noInternetConnection ='noInternetConnection';;
-  static const String unknown ="unknown";
+  static const String noInternetConnection = 'noInternetConnection';
+  static const String notFound = 'notFound';
+
+  static const String unknown = "unknown";
 }

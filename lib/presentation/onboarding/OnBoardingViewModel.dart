@@ -4,10 +4,8 @@ import 'package:afalmi/domain/models.dart';
 import 'package:afalmi/presentation/app_resources/assets_manager.dart';
 import 'package:afalmi/presentation/app_resources/strings_manager.dart';
 import 'package:afalmi/presentation/base/BaseViewModel.dart';
-import 'package:flutter/material.dart';
 
-class OnBoardingViewModel extends BaseViewModel
-    with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
+class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
   final StreamController _streamController = StreamController<SliderView>();
   late final List<OnBoardingSlider> _list;
   int _currentIndex = 0;
