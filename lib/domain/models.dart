@@ -9,8 +9,16 @@ class OnBoardingSlider {
 
 class Customer {
   final String id;
-  final int name;
+  final String name;
   final int numOfNotifications;
 
   Customer(this.id, this.name, this.numOfNotifications);
+}
+
+
+
+class Authentication{
+  final Customer customer;
+
+  Authentication(this.customer);
 }

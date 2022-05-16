@@ -20,7 +20,7 @@ Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
 CustomerResponse _$CustomerResponseFromJson(Map<String, dynamic> json) =>
     CustomerResponse(
       json['id'] as String?,
-      json['name'] as int?,
+      json['name'] as String?,
       json['numOfNotifications'] as int?,
     );
 

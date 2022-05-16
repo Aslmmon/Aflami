@@ -22,7 +22,7 @@ class CustomerResponse {
   @JsonKey(name: 'id')
   String? id;
   @JsonKey(name: 'name')
-  int? name;
+  String? name;
   @JsonKey(name: 'numOfNotifications')
   int? numOfNotifications;
 
