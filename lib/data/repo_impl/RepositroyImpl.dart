@@ -1,5 +1,6 @@
 import 'package:afalmi/data/data_source/remote_data_source/RemoteDataSource.dart';
 import 'package:afalmi/data/mapper/CustomerResponseMapper.dart';
+import 'package:afalmi/data/network/error_handler.dart';
 import 'package:afalmi/data/network/failure.dart';
 import 'package:afalmi/data/network/network_info.dart';
 import 'package:afalmi/data/network/requests.dart';
@@ -18,14 +19,23 @@ class RepoImpl implements Repository {
   Future<Either<Failure, Authentication>> login(
       LoginRequest loginRequest) async {
     if (await _networkInfo.isConnected) {
-      final response = await _remoteDataSource.login(loginRequest);
-      if (response.status == 0) {
-        return Right(response.toDomain());
-      } else {
-        return Left(Failure(409, response.message.toString()));
+      try {
+        final response = await _remoteDataSource.login(loginRequest);
+        if (response.status == ApiInternalCodes.success) {
+          return Right(response.toDomain());
+        } else {
+          return Left(
+              Failure(ApiInternalCodes.failure, response.message.toString()));
+        }
+      } catch (error) {
+        return Left(ErrorHandler
+            .handle(error)
+            .failure);
       }
-    } else {
-      return Left(Failure(501, "Connection Error"));
+    }
+
+    else {
+      return Left(DataSourceError.noInternetConnection.getFailure());
     }
   }
-}
+}}

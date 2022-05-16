@@ -1,4 +1,43 @@
 import 'package:afalmi/data/network/failure.dart';
+import 'package:dio/dio.dart';
+
+class ErrorHandler implements Exception {
+  late Failure failure;
+
+  ErrorHandler.handle(dynamic error) {
+    if (error is DioError) {
+      failure = _handleError(error);
+    } else {
+      failure = DataSourceError.defaultError.getFailure();
+    }
+  }
+}
+
+Failure _handleError(DioError error) {
+  switch (error.type) {
+    case DioErrorType.connectTimeout:
+      return DataSourceError.connectionTimeOut.getFailure();
+    case DioErrorType.sendTimeout:
+      return DataSourceError.sendTimeOut.getFailure();
+    case DioErrorType.receiveTimeout:
+      return DataSourceError.recieveTimeOut.getFailure();
+
+    case DioErrorType.response:
+
+      /// here i have a response with status code / status message from Api
+      if (error.response?.statusCode != null &&
+          error.response?.statusMessage != null) {
+        return Failure(error.response?.statusCode ?? 0,
+            error.response?.statusMessage ?? '');
+      } else {
+        return DataSourceError.defaultError.getFailure();
+      }
+    case DioErrorType.cancel:
+      return DataSourceError.cancel.getFailure();
+    case DioErrorType.other:
+      return DataSourceError.defaultError.getFailure();
+  }
+}
 
 enum DataSourceError {
   success,
@@ -14,6 +53,7 @@ enum DataSourceError {
   sendTimeOut,
   cachError,
   noInternetConnection,
+  defaultError,
 }
 
 extension DataSourceErrorExt on DataSourceError {
@@ -49,6 +89,9 @@ extension DataSourceErrorExt on DataSourceError {
       case DataSourceError.noInternetConnection:
         return Failure(ResponseCode.noInternetConnection,
             ResponseMessage.noInternetConnection);
+      case DataSourceError.defaultError:
+        return Failure(ResponseCode.noInternetConnection,
+            ResponseMessage.noInternetConnection);
     }
   }
 }
@@ -71,6 +114,7 @@ class ResponseCode {
   static const int cachError = -5;
   static const int noInternetConnection = -6;
   static const int unknown = -7;
+  static const int defaultError = -8;
 }
 
 class ResponseMessage {
@@ -90,6 +134,12 @@ class ResponseMessage {
   static const String cachError = 'cachError';
   static const String noInternetConnection = 'noInternetConnection';
   static const String notFound = 'notFound';
+  static const String defaultError = "defaultError";
 
   static const String unknown = "unknown";
+}
+
+class ApiInternalCodes {
+  static const int success = 0;
+  static const int failure = 1;
 }
