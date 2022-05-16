@@ -4,7 +4,6 @@ import 'package:afalmi/data/network/error_handler.dart';
 import 'package:afalmi/data/network/failure.dart';
 import 'package:afalmi/data/network/network_info.dart';
 import 'package:afalmi/data/network/requests.dart';
-import 'package:afalmi/data/responses/login_response.dart';
 import 'package:afalmi/domain/models.dart';
 import 'package:afalmi/domain/repository/repository.dart';
 import 'package:dartz/dartz.dart';
@@ -38,4 +37,4 @@ class RepoImpl implements Repository {
       return Left(DataSourceError.noInternetConnection.getFailure());
     }
   }
-}}
+}
