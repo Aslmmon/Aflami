@@ -1,3 +1,4 @@
+import 'package:afalmi/app/app_prefrences.dart';
 import 'package:afalmi/presentation/app_resources/constants_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -10,16 +11,18 @@ const String authroization = "authorization";
 const String defaultLanguage = "language";
 
 class DioFactory {
+  final AppPrefrences _appSharedPrefrences;
+
+  DioFactory(this._appSharedPrefrences);
+
   Future<Dio> getDio() async {
     Dio dio = Dio();
-
-    int _timeeout = 60 * 1000;
 
     Map<String, String> headers = {
       applicationJson: applicationJson,
       authroization: "token",
       accept: accept,
-      defaultLanguage: 'en'
+      defaultLanguage: await _appSharedPrefrences.getAppLanguage()
     };
     dio.options = BaseOptions(
         baseUrl: AppConstants.baseUrl,
