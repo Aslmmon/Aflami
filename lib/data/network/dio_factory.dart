@@ -24,8 +24,8 @@ class DioFactory {
     dio.options = BaseOptions(
         baseUrl: AppConstants.baseUrl,
         headers: headers,
-        receiveTimeout: _timeeout,
-        sendTimeout: _timeeout);
+        receiveTimeout: AppConstants.apiTimeOut,
+        sendTimeout: AppConstants.apiTimeOut);
 
     if (!kReleaseMode) {
       dio.interceptors.add(PrettyDioLogger(
